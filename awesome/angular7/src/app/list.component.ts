@@ -9,12 +9,12 @@ import {HttpClient} from "@angular/common/http";
 export class ListComponent {
 
     @Input() set filter(searchText: string) {
-       this.searchText = searchText;
-       this.onLoad();
+        this.searchText = searchText;
+        this.onLoad();
     }
 
     searchText: string = '';
-    baseUrl:string = 'http://awesome.test';
+    baseUrl:string = 'http://a-lot-of-games.ru/tmp';
     glData = [];
 
     constructor(private httpClient : HttpClient){}
@@ -33,9 +33,7 @@ export class ListComponent {
             )
             .subscribe((res : any[]) => {
                 try{
-                    this.glData = JSON.parse(
-                        res && res.toString() || '[]'
-                    );
+                    this.glData = (typeof res == 'object' && res) || [];
                 }catch(e){}
             });
     }
